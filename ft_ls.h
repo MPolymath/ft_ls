@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/17 15:30:58 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/01 06:12:12 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/02 04:43:09 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include               <errno.h>
 # include               <stdio.h>
 # include               <string.h>
+# include				<pwd.h>
+# include				<grp.h>
+# include				<time.h>
 
 typedef struct			s_hash
 {
@@ -39,8 +42,8 @@ typedef struct			s_main
 
 typedef	struct			s_files
 {
-	struct stat			*stats;
-//	char				*path;
+	struct stat			stats;
+	char				*path;
 	char				*nme;
 }						t_files;
 
@@ -49,10 +52,12 @@ typedef struct			s_dir
 	DIR					*dir;
 	struct dirent		*entry;
 	char				*path;
+	int					l;
 	int					i;
 	int					j;
 	int					k;
 	int					valid;
+	int					nbr_files;
 	t_files				*files;
 }						t_dir;
 
@@ -73,11 +78,12 @@ void					ft_ls_r_init_loop(t_dir *vars,
 void					ft_ls_init_loop(t_dir *vars,
 						char **argv, int **argv_i);
 void					ft_ls(char **argv, int *argv_i,
-						int argc, int a);
+							  int argc, int a);
+void					ft_ls_l(char **argv, int *argv_i, int argc);
 void					ft_ls_r(char **argv,
 						int *argv_i, int argc, int a);
 void					flip_argv(char **argv, int *argc);
-void					main_extension(char **argv, int *a,
-						int **tbl_argv_i, int *argc);
+void					main_extension(char **argv, int *a, int *l,
+										int **tbl_argv_i, int *argc);
 #endif
 

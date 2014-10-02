@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:59:12 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/01 00:27:19 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/02 05:11:30 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,84 @@ void			odr_prnt_r1(t_dir **vars, int **argc)
 	(**argc)--;
 }
 
+
+void			ft_fix_time_str(char **time)
+{
+	int			i;
+	int			j;
+	i = 0;
+	j = 0;
+	while ((*time)[i] != ' ')
+	{
+		while ((*time)[j + 1] != '\0')
+		{
+			(*time)[j] = (*time)[j + 1];
+			j++;
+		}
+		(*time)[j] = (*time)[j + 1];
+		j = 0;
+		i++;
+	}
+	i = 0;
+	while ((*time)[i] != ':')
+		i++;
+	i = i + 3;
+	while ((*time)[i] != '\0')
+	{
+		((*time)[i] = '\0');
+		i++;
+	}
+}
+
+void			ft_print_rights(t_dir **vars, int i)
+{
+	struct passwd	*pass;
+	struct group	*grp;
+	char			*time;
+
+	time = ctime(&((*vars)->files[i].stats.st_mtime));
+	ft_fix_time_str(&time);
+	ft_putstr( (S_ISDIR((*vars)->files[i].stats.st_mode)) ? "d" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IRUSR) ? "r" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWUSR) ? "w" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXUSR) ? "x" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IRGRP) ? "r" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWGRP) ? "w" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXGRP) ? "x" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IROTH) ? "r" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWOTH) ? "w" : "-");
+	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXOTH) ? "x" : "-");
+	ft_putstr("  ");
+	ft_putnbr((*vars)->files[i].stats.st_nlink);
+	ft_putstr("  ");
+	pass = getpwuid((*vars)->files[i].stats.st_uid);
+	grp = getgrgid((*vars)->files[i].stats.st_gid);
+	ft_putstr(pass->pw_name);
+	ft_putstr("  ");
+	ft_putstr(grp->gr_name);
+	ft_putstr("  ");
+	ft_putnbr((*vars)->files[i].stats.st_size);
+	ft_putstr("  ");
+	ft_putstr(time);
+	ft_putstr("  ");
+}
+
 void			odr_prnt_r0(t_dir **vars)
 {
+	if ((*vars)->l == 1)
+	{
+		while ((*vars)->files[(*vars)->i].nme != '\0')
+		{
+			if ((*vars)->files[(*vars)->i].nme[0] != '.')
+			{
+				ft_print_rights(vars, (*vars)->i);
+				ft_putstr((*vars)->files[(*vars)->i].nme);
+				ft_putstr("\n");
+			}
+			((*vars)->i)++;
+			((*vars)->j)++;
+		}
+	}
 	while ((*vars)->files[(*vars)->i].nme != '\0')
 	{
 		ft_putstr((*vars)->files[(*vars)->i].nme);
@@ -57,8 +133,8 @@ void			order_print_files(t_dir *vars, int *argc, int r)
 		ft_putstr("\n");
 		(vars->j) = 0;
 	}
-	if (vars->files[0].nme != '\0')
-		ft_putstr("\n");
+//	if (vars->files[0].nme != '\0')
+//		ft_putstr("\n");
 	(vars->i) = 0;
 	if (vars->dir != NULL)
 		closedir(vars->dir);
