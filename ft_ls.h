@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/17 15:30:58 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/02 04:43:09 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 01:12:11 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ typedef	struct			s_files
 	char				*nme;
 }						t_files;
 
+typedef struct			s_main_ext
+{
+	int					a;
+	int					l;
+	int					*tbl_argv_i;
+}						t_main_ext;
+
+typedef struct			s_id
+{
+	struct passwd		*pass;
+	struct group		*grp;
+	char				*time;
+}						t_id;
+
 typedef struct			s_dir
 {
 	DIR					*dir;
@@ -71,6 +85,12 @@ void					order_files(t_files **files);
 void					odr_prnt_r1(t_dir **vars, int **argc);
 void					odr_prnt_r0(t_dir **vars);
 void					order_print_files(t_dir *vars, int *argc, int r);
+void					ft_print_rights(t_dir **vars, int i);
+void					ft_print_rights2(t_dir **vars, int i, t_id *id_vars);
+void					fill_path(t_dir **vars, char **argv,
+									int **argv_i);
+void					fill_path_r(t_dir **vars, char **argv,
+									int **argv_i, int *argc);
 void					ls_init(t_dir *vars);
 void					ft_ls_chck_lst(t_dir *vars);
 void					ft_ls_r_init_loop(t_dir *vars,
@@ -82,8 +102,14 @@ void					ft_ls(char **argv, int *argv_i,
 void					ft_ls_l(char **argv, int *argv_i, int argc);
 void					ft_ls_r(char **argv,
 						int *argv_i, int argc, int a);
+void					ft_fix_time_str(char **time);
+void					ft_fix_time_str2(char **time);
 void					flip_argv(char **argv, int *argc);
-void					main_extension(char **argv, int *a, int *l,
-										int **tbl_argv_i, int *argc);
+int						main_argc(char **argv, t_main_ext *vars,
+										int *argc);
+void					main_extension(char **argv, t_main_ext *vars,
+										int *argc);
+void					set_extensions(char **argv, t_main_ext **vars,
+										int *argc);
 #endif
 

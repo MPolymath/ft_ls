@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:59:58 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/02 05:06:32 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 04:49:25 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,38 @@ void	count_file_nbr(t_dir **vars)
 	}
 }
 
-void	ft_ls_r_init_loop(t_dir *vars, char **argv, int **argv_i, int *argc)
+void	fill_path(t_dir **vars, char **argv, int **argv_i)
 {
 	int	i;
 
 	i = 0;
+	(*vars)->path = ft_strdup(argv[(*argv_i)[(*vars)->k]]);
+	(*vars)->dir = opendir((*vars)->path);
+	while ((*vars)->path[i] != '\0')
+		i++;
+	if ((*vars)->path[i - 1] != '/')
+		(*vars)->path = ft_strjoin((*vars)->path, "/");
+	printf("var_path: %s\n", (*vars)->path);
+}
+
+void	fill_path_r(t_dir **vars, char **argv, int **argv_i, int *argc)
+{
+	int	i;
+
+	i = 0;
+	(*vars)->path = ft_strdup((argv)[(*argv_i)[(*argc) - 2]]);
+	(*vars)->dir = opendir((*vars)->path);
+	while ((*vars)->path[i] != '\0')
+		i++;
+	if ((*vars)->path[i - 1] != '/')
+		(*vars)->path = ft_strjoin((*vars)->path, "/");
+	printf("var_path: %s\n", (*vars)->path);
+}
+
+void	ft_ls_r_init_loop(t_dir *vars, char **argv, int **argv_i, int *argc)
+{
 	if (*argc > 1)
-	{
-		vars->path = ft_strdup((argv)[(*argv_i)[(*argc) - 2]]);
-		while (vars->path[i] != '\0') // testing seg solve
-			i++;
-		if (vars->path[i - 1] != '/')
-			vars->path = ft_strjoin(vars->path, "/");
-		printf("var_path: %s\n", vars->path);
-		vars->dir = opendir(vars->path);
-	}
+		fill_path_r(&vars, argv, argv_i, argc);
 	else
 	{
 		vars->path = ft_strdup("./");
@@ -57,19 +74,8 @@ void	ft_ls_r_init_loop(t_dir *vars, char **argv, int **argv_i, int *argc)
 
 void	ft_ls_init_loop(t_dir *vars, char **argv, int **argv_i)
 {
-	int i;
-
-	i = 0;
 	if (argv[(*argv_i)[vars->k]] != NULL)
-	{
-		vars->path = ft_strdup(argv[(*argv_i)[vars->k]]);
-		while (vars->path[i]) // testing seg solve
-			i++;
-		if (vars->path[i - 1] != '/')
-			vars->path = ft_strjoin(vars->path, "/");
-		printf("var_path: %s\n", vars->path);
-		vars->dir = opendir(vars->path);
-	}
+		fill_path(&vars, argv, argv_i);
 	else
 	{
 		vars->path = ft_strdup("./");
@@ -147,7 +153,6 @@ void	ft_ls_l_none(char **argv, int *argv_i, int argc, int a) // added for nopara
 		}
 	}
 	order_print_files(&vars, &argc, 0);
-	printf("test6\n");
 	free(vars.path);
 }
 
@@ -192,7 +197,7 @@ void	ft_ls_l(char **argv, int *argv_i, int argc)
 	t_dir	vars;
 
 	vars.l = 1;
-	if (argc == 1)
+	if ((argc == 1))
 		ft_ls_l_none(argv, argv_i, argc, 1);
 	ls_init(&vars);
 	while (vars.k != (argc - 1))

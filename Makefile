@@ -6,13 +6,17 @@
 #    By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/20 23:02:19 by mdiouf            #+#    #+#              #
-#    Updated: 2014/04/20 23:02:21 by mdiouf           ###   ########.fr        #
+#    Updated: 2014/10/04 00:54:18 by mdiouf           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRCS = ft_ls.c ft_ls_1.c ft_ls_2.c ft_ls_3.c
+SRCS = ft_ls.c \
+		ft_ls_1.c \
+		ft_ls_2.c \
+		ft_ls_3.c \
+		ft_ls_4.c
 
 OBJS = $(SRCS:.c=.o)
 

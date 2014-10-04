@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:58:05 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/01 06:08:56 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 04:48:46 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cr_tb_hash_init(t_main *vars, int argc, t_hash *tb_hash, char **argv)
 void	cr_tb_hash_main(t_main *vars, int argc, t_hash *tb_hash)
 {
 	(vars->i) = 1;
-	while ((vars->i) != argc - 1 && argc != 1) // && added
+	while ((vars->i) != argc - 1 && argc != 1)
 	{
 		if (ft_strcmp(tb_hash[vars->i].argv, tb_hash[(vars->i)
 			+ 1].argv) > 0)
@@ -89,7 +89,6 @@ void	order_files(t_files **files)
 		good = 1;
 		while (files[0][i + 1].nme != '\0')
 		{
-//			printf("files[%d]: %s\n", i, files[0][i].nme);
 			if (ft_strcmp(files[0][i].nme, files[0][i + 1].nme) > 0)
 			{
 				temp = files[0][i + 1];
