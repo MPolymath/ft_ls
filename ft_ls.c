@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/14 14:27:23 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 04:51:06 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 04:54:18 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void			set_extensions(char **argv, t_main_ext **vars, int *argc)
 	else
 		(*vars)->l = 0;
 }
+
 void			add_slash(char **argv)
 {
 	int			i;
@@ -38,7 +39,7 @@ void			add_slash(char **argv)
 		if (argv[i][j - 1] != '/')
 			argv[i] = ft_strjoin(argv[i], "/");
 		j = 0;
-	i++;
+		i++;
 	}
 }
 
@@ -86,8 +87,8 @@ int				main(int argc, char **argv)
 	}
 	else
 	{
-			vars.tbl_argv_i = cr_tb_hash(argc, argv);
-			ft_ls(argv, vars.tbl_argv_i, argc, 0);
+		vars.tbl_argv_i = cr_tb_hash(argc, argv);
+		ft_ls(argv, vars.tbl_argv_i, argc, 0);
 	}
 	return (1);
 }

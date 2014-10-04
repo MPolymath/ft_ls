@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/10/04 00:47:10 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 00:50:12 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 05:11:54 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ void			ft_print_rights(t_dir **vars, int i)
 
 	id_vars.time = ctime(&((*vars)->files[i].stats.st_mtime));
 	ft_fix_time_str(&(id_vars.time));
-	ft_putstr( (S_ISDIR((*vars)->files[i].stats.st_mode)) ? "d" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IRUSR) ? "r" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWUSR) ? "w" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXUSR) ? "x" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IRGRP) ? "r" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWGRP) ? "w" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXGRP) ? "x" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IROTH) ? "r" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IWOTH) ? "w" : "-");
-	ft_putstr( ((*vars)->files[i].stats.st_mode & S_IXOTH) ? "x" : "-");
+	ft_putstr((S_ISDIR((*vars)->files[i].stats.st_mode)) ? "d" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IRUSR) ? "r" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IWUSR) ? "w" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IXUSR) ? "x" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IRGRP) ? "r" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IWGRP) ? "w" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IXGRP) ? "x" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IROTH) ? "r" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IWOTH) ? "w" : "-");
+	ft_putstr(((*vars)->files[i].stats.st_mode & S_IXOTH) ? "x" : "-");
 	ft_print_rights2(vars, i, &id_vars);
 }

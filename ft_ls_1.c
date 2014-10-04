@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:58:05 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 04:48:46 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/04 04:55:34 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	cr_tb_hash_init(t_main *vars, int argc, t_hash *tb_hash, char **argv)
 		tb_hash[vars->i].argv = argv[vars->i];
 		(vars->i)++;
 		if (argc == 1)
-			break;
+			break ;
 	}
 }
 
@@ -71,7 +71,7 @@ int		*cr_tb_hash(int argc, char **argv)
 		(vars.j)++;
 		(vars.i)++;
 		if (argc == 1)
-			break;
+			break ;
 	}
 	return (vars.argv_i);
 }
