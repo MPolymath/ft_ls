@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/14 14:27:23 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 04:54:18 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 21:24:05 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			main_extension(char **argv, t_main_ext *vars, int *argc)
 int				main_argc(char **argv, t_main_ext *vars, int *argc)
 {
 	if (ft_strcmp(argv[1], "-a") == 0 ||
-		ft_strcmp(argv[1], "-r") == 0 || ft_strcmp(argv[1], "-l") == 0)
+		ft_strcmp(argv[1], "-r") == 0)
 		main_extension(argv, vars, argc);
 	else if (argv[1][0] == '-')
 	{

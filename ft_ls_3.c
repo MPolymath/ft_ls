@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:59:58 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 05:10:17 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 22:53:49 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	count_file_nbr(t_dir **vars)
 
 void	fill_path(t_dir **vars, char **argv, int **argv_i)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	(*vars)->path = ft_strdup(argv[(*argv_i)[(*vars)->k]]);
@@ -35,7 +35,8 @@ void	fill_path(t_dir **vars, char **argv, int **argv_i)
 		i++;
 	if ((*vars)->path[i - 1] != '/')
 		(*vars)->path = ft_strjoin((*vars)->path, "/");
-	printf("var_path: %s\n", (*vars)->path);
+	ft_putstr((*vars)->path);
+	ft_putstr(":\n");
 }
 
 void	fill_path_r(t_dir **vars, char **argv, int **argv_i, int *argc)
@@ -49,7 +50,8 @@ void	fill_path_r(t_dir **vars, char **argv, int **argv_i, int *argc)
 		i++;
 	if ((*vars)->path[i - 1] != '/')
 		(*vars)->path = ft_strjoin((*vars)->path, "/");
-	printf("var_path: %s\n", (*vars)->path);
+	ft_putstr((*vars)->path);
+	ft_putstr(":\n");
 }
 
 void	ft_ls_r_init_loop(t_dir *vars, char **argv, int **argv_i, int *argc)
@@ -103,15 +105,14 @@ void	ft_ls_none(char **argv, int *argv_i, int argc, int a)
 		if (a == 1 || ((a == 0) && (vars.entry)->d_name[0] != '.'))
 		{
 			ft_ls_chck_lst(&vars);
-			vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-									* (ft_strlen(vars.entry->d_name) + 1));
-			vars.files[vars.i].nme = (vars.entry)->d_name;
+			vars.files[vars.i].nme = ft_strdup((vars.entry)->d_name);
 			vars.files[vars.i].path =
-						ft_strjoin(vars.path, vars.files[vars.i].nme);
+					ft_strjoin(vars.path, vars.files[vars.i].nme);
 			stat(vars.files[vars.i].path, &(vars.files[vars.i].stats));
 		}
 	}
 	order_print_files(&vars, &argc, 0);
+	free(vars.entry);
 	free(vars.path);
 }
 
@@ -127,11 +128,9 @@ void	ft_ls_l_none(char **argv, int *argv_i, int argc, int a)
 		if (a == 1 || ((a == 0) && (vars.entry)->d_name[0] != '.'))
 		{
 			ft_ls_chck_lst(&vars);
-			vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-									* (ft_strlen(vars.entry->d_name) + 1));
-			vars.files[vars.i].nme = (vars.entry)->d_name;
+			vars.files[vars.i].nme = ft_strdup((vars.entry)->d_name);
 			vars.files[vars.i].path =
-						ft_strjoin(vars.path, vars.files[vars.i].nme);
+					ft_strjoin(vars.path, vars.files[vars.i].nme);
 			stat(vars.files[vars.i].path, &(vars.files[vars.i].stats));
 		}
 	}
@@ -154,12 +153,10 @@ void	ft_ls(char **argv, int *argv_i, int argc, int a)
 			if (a == 1 || ((a == 0) && (vars.entry)->d_name[0] != '.'))
 			{
 				ft_ls_chck_lst(&vars);
-				vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-										* (ft_strlen(vars.entry->d_name) + 1));
 				vars.files[vars.i].nme =
-									(vars.entry)->d_name;
+								ft_strdup((vars.entry)->d_name);
 				vars.files[vars.i].path =
-							ft_strjoin(vars.path, vars.files[vars.i].nme);
+						ft_strjoin(vars.path, vars.files[vars.i].nme);
 				stat(vars.files[vars.i].path, &(vars.files[vars.i].stats));
 			}
 		}
@@ -182,15 +179,14 @@ void	ft_ls_l(char **argv, int *argv_i, int argc)
 		while (vars.dir != NULL && (vars.entry = readdir(vars.dir)))
 		{
 			ft_ls_chck_lst(&vars);
-			vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-									* (ft_strlen(vars.entry->d_name) + 1));
-			vars.files[vars.i].nme = (vars.entry)->d_name;
+			vars.files[vars.i].nme = ft_strdup((vars.entry)->d_name);
 			vars.files[vars.i].path =
-							ft_strjoin(vars.path, vars.files[vars.i].nme);
+						ft_strjoin(vars.path, vars.files[vars.i].nme);
 			stat(vars.files[vars.i].path, &(vars.files[vars.i].stats));
 		}
 		order_print_files(&vars, &argc, 0);
 		free(vars.path);
+		free(vars.files);
 	}
 }
 
@@ -205,9 +201,7 @@ void	ft_ls_r_none(char **argv, int *argv_i, int argc, int a)
 		if (a == 1 || ((a == 0) && (vars.entry)->d_name[0] != '.'))
 		{
 			ft_ls_chck_lst(&vars);
-			vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-									* (ft_strlen(vars.entry->d_name) + 1));
-			vars.files[vars.i].nme = (vars.entry)->d_name;
+			vars.files[vars.i].nme = ft_strdup((vars.entry)->d_name);
 		}
 	}
 	order_print_files(&vars, &argc, 1);
@@ -229,9 +223,7 @@ void	ft_ls_r(char **argv, int *argv_i, int argc, int a)
 			if (a == 1 || ((a == 0) && (vars.entry)->d_name[0] != '.'))
 			{
 				ft_ls_chck_lst(&vars);
-				vars.files[vars.i].nme = (char*)malloc(sizeof(char)
-										* (ft_strlen(vars.entry->d_name) + 1));
-				vars.files[vars.i].nme = (vars.entry)->d_name;
+				vars.files[vars.i].nme = ft_strdup((vars.entry)->d_name);
 			}
 		}
 		order_print_files(&vars, &argc, 1);

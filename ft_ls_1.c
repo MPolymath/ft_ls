@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:58:05 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 04:55:34 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 21:25:25 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		*cr_tb_hash(int argc, char **argv)
 		if (argc == 1)
 			break ;
 	}
+	free(tb_hash);
 	return (vars.argv_i);
 }
 

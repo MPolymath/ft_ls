@@ -6,7 +6,7 @@
 #    By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/24 22:53:44 by mdiouf            #+#    #+#              #
-#    Updated: 2013/12/01 17:47:28 by mdiouf           ###   ########.fr        #
+#    Updated: 2014/10/05 21:14:45 by mdiouf           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ SRC = ft_atoi2.c ft_index_lastalnum.c ft_index_firstalnum.c \
 		ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c \
 		ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
 		ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
-		ft_strtrim.c
+		ft_strtrim.c ft_strjoin2.c
 
 OBJECT = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/14 09:16:53 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/04/14 11:33:26 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 21:10:49 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			ft_strequ(char const *s1, char const *s2);
 int			ft_strnequ(char const *s1, char const *s2, size_t n);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin2(char **s1, char const *s2);
 int			ft_index_lastalnum(char const *s);
 int			ft_index_firstalnum(char const *s);
 char		*ft_begin_end_space_delete(char const *s);

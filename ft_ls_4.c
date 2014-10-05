@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/10/04 00:47:10 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 05:11:54 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 22:48:37 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void			ft_print_rights(t_dir **vars, int i)
 	ft_putstr(((*vars)->files[i].stats.st_mode & S_IWOTH) ? "w" : "-");
 	ft_putstr(((*vars)->files[i].stats.st_mode & S_IXOTH) ? "x" : "-");
 	ft_print_rights2(vars, i, &id_vars);
+	free((*vars)->files[i].nme);
 }

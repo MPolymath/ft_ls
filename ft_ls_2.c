@@ -6,7 +6,7 @@
 /*   By: mdiouf <mdiouf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/20 22:59:12 by mdiouf            #+#    #+#             */
-/*   Updated: 2014/10/04 04:32:03 by mdiouf           ###   ########.fr       */
+/*   Updated: 2014/10/05 22:56:06 by mdiouf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			odr_prnt_r1(t_dir **vars, int **argc)
 	{
 		ft_putstr((*vars)->files[(*vars)->i].nme);
 		ft_putstr("\n");
+		free((*vars)->files[(*vars)->i].path);
 		((*vars)->i)--;
 		((*vars)->j)++;
 	}
@@ -39,6 +40,7 @@ void			odr_prnt_r0(t_dir **vars)
 				ft_putstr((*vars)->files[(*vars)->i].nme);
 				ft_putstr("\n");
 			}
+			free((*vars)->files[(*vars)->i].path);
 			((*vars)->nbr_files)--;
 			((*vars)->i)++;
 			((*vars)->j)++;
@@ -48,6 +50,7 @@ void			odr_prnt_r0(t_dir **vars)
 	{
 		ft_putstr((*vars)->files[(*vars)->i].nme);
 		ft_putstr("\n");
+		free((*vars)->files[(*vars)->i].path);
 		((*vars)->i)++;
 		((*vars)->j)++;
 	}
